@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- orcm configuration file. -->
+
+<!-- CRITICAL NOTE: A node can only appear ONCE in orcm-group  -->
+
+<configuration>
+
+<orcm-daemons>
+  <nodes>
+    <value>node001</value>
+    <value>node002</value>
+    <value>node003</value>
+    <value>node004</value>
+    <value>node005</value>
+    <value>node006</value>
+    <value>node007</value>
+    <value>node008</value>
+    <value>node009</value>
+    <value>node010</value>
+    <value>node011</value>
+    <value>node012</value>
+    <value>node013</value>
+    <value>node014</value>
+    <value>node015</value>
+    <value>node016</value>
+    <value>node017</value>
+    <value>node018</value>
+    <value>node019</value>
+    <value>node020</value>
+    <value>node021</value>
+    <value>node022</value>
+    <value>node023</value>
+    <value>node024</value>
+    <value>node025</value>
+    <value>node026</value>
+    <value>node027</value>
+    <value>node028</value>
+    <value>node029</value>
+    <value>node030</value>
+    <value>node031</value>
+    <value>node032</value>
+    <value>node033</value>
+    <value>node034</value>
+    <value>node035</value>
+    <value>node036</value>
+    <value>node037</value>
+    <value>node038</value>
+    <value>node039</value>
+    <value>node040</value>
+    <value>node041</value>
+    <value>node042</value>
+    <value>node043</value>
+    <value>node044</value>
+    <value>node045</value>
+    <value>node046</value>
+    <value>node047</value>
+    <value>node048</value>
+    <value>node049</value>
+    <value>node050</value>
+    <value>node051</value>
+    <value>node052</value>
+    <value>node053</value>
+    <value>node054</value>
+    <value>node055</value>
+    <value>node056</value>
+    <value>node057</value>
+    <value>node058</value>
+    <value>node059</value>
+    <value>node060</value>
+    <value>node061</value>
+    <value>node062</value>
+    <value>node063</value>
+    <value>node064</value>
+    <value>node065</value>
+    <value>node066</value>
+    <value>node067</value>
+    <value>node068</value>
+    <value>node069</value>
+    <value>node070</value>
+    <value>node071</value>
+    <value>node072</value>
+    <value>node073</value>
+    <value>node074</value>
+    <value>node075</value>
+    <value>node076</value>
+    <value>node077</value>
+    <value>node078</value>
+    <value>node079</value>
+    <value>node080</value>
+    <value>node081</value>
+    <value>node082</value>
+    <value>node083</value>
+    <value>node084</value>
+    <value>node085</value>
+    <value>node086</value>
+    <value>node087</value>
+    <value>node088</value>
+    <value>node089</value>
+    <value>node090</value>
+    <value>node091</value>
+    <value>node092</value>
+    <value>node093</value>
+    <value>node094</value>
+    <value>node095</value>
+    <value>node096</value>
+    <value>node097</value>
+    <value>node098</value>
+    <value>node099</value>
+    <value>node100</value>
+  </nodes>
+  <port>
+    <value>55805</value>
+  </port>
+  <mca-params>
+    <value>sensor_base_sample_rate=5,sensor_heartbeat_rate=10,sensor_base_log_samples=1,db_print_file=-,sensor=sigar</value>
+  </mca-params>
+</orcm-daemons>
+
+<orcm-aggregators>
+  <nodes>
+    <value>master</value>
+  </nodes>
+  <port>
+    <value>55805</value>
+  </port>
+  <mca-params>
+    <value>sensor_base_sample_rate=5,sensor_heartbeat_rate=10,sensor_base_log_samples=1,db_print_file=-,sensor=sigar</value>
+  </mca-params>
+</orcm-aggregators>
+
+<orcm-schedulers>
+  <description>Identify the node that houses the ORCM scheduler. Only
+  one allowed at this time</description>
+  <nodes>
+    <value>master</value>
+  </nodes>
+  <port>
+    <value>55820</value>
+    <description>Port used by orcm scheduler</description>
+  </port>
+  <mca-params>
+    <description>List of MCA params to be used by scheduler</description>
+  </mca-params>
+</orcm-schedulers>
+
+</configuration>
