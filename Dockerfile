@@ -3,13 +3,18 @@ FROM opensuse
 MAINTAINER Ben McClelland <ben.mcclelland@gmail.com>
 
 RUN zypper --no-gpg-checks --non-interactive install wget unzip tar git gcc m4 gcc-c++ make flex openssl \
-                                                     openssl-devel unixODBC unixODBC-devel xz patch libtool rpm-build
+                                                     openssl-devel unixODBC unixODBC-devel xz patch libtool \
+                                                     rpm-build cmake
 
-RUN wget http://mirror.anl.gov/pub/centos/6.5/os/x86_64/Packages/sigar-1.6.5-0.4.git58097d9.el6.x86_64.rpm && \
-    wget http://mirror.anl.gov/pub/centos/6.5/os/x86_64/Packages/sigar-devel-1.6.5-0.4.git58097d9.el6.x86_64.rpm && \
-    zypper --no-gpg-checks --non-interactive install sigar-1.6.5-0.4.git58097d9.el6.x86_64.rpm \
-                                                     sigar-devel-1.6.5-0.4.git58097d9.el6.x86_64.rpm &&\
-    rm -f sigar-1.6.5-0.4.git58097d9.el6.x86_64.rpm sigar-devel-1.6.5-0.4.git58097d9.el6.x86_64.rpm
+RUN wget http://vault.centos.org/6.5/os/Source/SPackages/sigar-1.6.5-0.4.git58097d9.el6.src.rpm && \
+    rpm -ihv ./sigar-1.6.5-0.4.git58097d9.el6.src.rpm
+
+ADD sigar.spec /usr/src/packages/SPECS/sigar.spec
+
+RUN rpmbuild -bb --clean --rmsource --rmspec /usr/src/packages/SPECS/sigar.spec && \
+    zypper --no-gpg-checks --non-interactive install /usr/src/packages/RPMS/x86_64/sigar-1.6.5-0.4.git58097d9.x86_64.rpm \
+                                                     /usr/src/packages/RPMS/x86_64/sigar-devel-1.6.5-0.4.git58097d9.x86_64.rpm && \
+    rm -rf sigar*
 
 RUN wget http://ipmiutil.sourceforge.net/FILES/ipmiutil-2.9.4-1.src.rpm && \
     rpmbuild --rebuild ipmiutil-2.9.4-1.src.rpm && \
@@ -37,8 +42,8 @@ RUN wget http://ftp.gnu.org/gnu/libtool/libtool-2.4.2.tar.xz && \
     cd .. && rm -rf libtool-2.4.2*
 
 
-RUN git config --global http.sslVerify false
-RUN git clone https://github.com/open-mpi/orcm.git && \
+RUN git config --global http.sslVerify false && \
+    git clone https://github.com/open-mpi/orcm.git && \
     cd orcm && \
     mkdir -p /opt/open-rcm && \
     ./autogen.pl && \
