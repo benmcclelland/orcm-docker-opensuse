@@ -17,7 +17,11 @@ RUN rpmbuild -bb --clean --rmsource --rmspec /usr/src/packages/SPECS/sigar.spec 
     rm -rf sigar*
 
 RUN wget http://ipmiutil.sourceforge.net/FILES/ipmiutil-2.9.5-1.src.rpm && \
-    rpmbuild --rebuild ipmiutil-2.9.5-1.src.rpm && \
+    rpm -hiv ./ipmiutil-2.9.5-1.src.rpm
+
+ADD ipmiutil.spec /usr/src/packages/SPECS/ipmiutil.spec
+
+RUN rpmbuild -bb --clean --rmsource --rmspec /usr/src/packages/SPECS/ipmiutil.spec && \
     rm -f ipmiutil-2.9.5* && \
     zypper --no-gpg-checks --non-interactive install /usr/src/packages/RPMS/x86_64/ipmiutil-2.9.5-1.x86_64.rpm \
                                                      /usr/src/packages/RPMS/x86_64/ipmiutil-devel-2.9.5-1.x86_64.rpm && \
